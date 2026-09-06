@@ -1,0 +1,6 @@
+.rover-moving { animation: rover-cruise 4.5s ease-in-out infinite; }
+.rover-moving i { animation: wheel-spin .7s linear infinite; }
+.satellite-moving { animation: satellite-drift 3.5s ease-in-out infinite; }
+@keyframes rover-cruise { 0%, 100% { transform: translate(-50%, -50%) translateX(-48px) rotate(-1deg); } 50% { transform: translate(-50%, -50%) translateX(48px) rotate(1deg); } }
+@keyframes wheel-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes satellite-drift { 0%, 100% { transform: translate(-50%, -50%) rotate(12deg) translateY(-10px); } 50% { transform: translate(-50%, -50%) rotate(12deg) translateY(10px); } }

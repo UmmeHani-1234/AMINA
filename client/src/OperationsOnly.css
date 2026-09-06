@@ -1,0 +1,14 @@
+.dashboard-shell .hero-copy,
+.dashboard-shell .decision-callout p,
+.dashboard-shell .text-button,
+.dashboard-shell .explain-box,
+.systems-hero > div:first-child > p,
+.detail-explanation,
+.tracking-hero > div:first-child > p,
+.cubesat-intro > div:first-child > p { display: none; }
+
+.dashboard-shell .dashboard-hero,
+.systems-hero,
+.tracking-hero { align-items: center; }
+
+.dashboard-shell .decision-callout { padding-bottom: 14px; }

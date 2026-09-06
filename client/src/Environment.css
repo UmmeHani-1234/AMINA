@@ -1,0 +1,37 @@
+.environment-night,
+.environment-day { position: relative; isolation: isolate; transition: color .8s ease, background-color .8s ease; }
+.environment-day::before { position: fixed; z-index: -1; inset: 0; content: ""; background: radial-gradient(ellipse at 72% 18%, rgba(224,247,255,.82), transparent 36%), linear-gradient(180deg, #8bbdce 0%, #b8d1d0 48%, #8a806b 100%); opacity: 1; transition: opacity .8s ease; pointer-events: none; }
+.environment-night::before { position: fixed; z-index: -1; inset: 0; content: ""; background: rgba(0,0,0,0); opacity: 1; pointer-events: none; }
+.environment-day .dashboard-shell,
+.environment-day .systems-page,
+.environment-day .tracking-page { --cyan: #b9f3ff; --cyan-bright: #65e7ff; --green: #b5ff74; --amber: #ffc857; --red: #ff8585; color: var(--cyan); transition: color .8s ease; }
+.environment-day .panel,
+.environment-day .systems-panel { background: linear-gradient(135deg, rgba(5,31,48,.9), rgba(9,42,60,.82)); border-color: rgba(161,236,251,.4); box-shadow: inset 0 0 28px rgba(95,240,255,.06), 0 8px 24px rgba(8,33,42,.18); transition: background .8s ease, border-color .8s ease; }
+.environment-day .panel-heading,
+.environment-day .systems-heading,
+.environment-day .tracking-heading { border-color: rgba(161,236,251,.24); color: #e4fcff; }
+.environment-day h1,
+.environment-day h2,
+.environment-day .metric-strip strong,
+.environment-day .decision-callout strong,
+.environment-day .health-row,
+.environment-day .target-row > div:first-child span,
+.environment-day .event-row b,
+.environment-day .tracking-stat strong { color: #e4fcff; }
+.environment-day .metric-strip,
+.environment-day .system-card { background: rgba(5,31,48,.78); border-color: rgba(161,236,251,.3); }
+.environment-day .terrain-map { background: radial-gradient(circle at 72% 20%, rgba(255,255,255,.48), transparent 32%), repeating-linear-gradient(0deg, rgba(4,77,97,.08) 0, rgba(4,77,97,.08) 1px, transparent 1px, transparent 32px), repeating-linear-gradient(90deg, rgba(4,77,97,.08) 0, rgba(4,77,97,.08) 1px, transparent 1px, transparent 32px); }
+.environment-day .tracking-svg { filter: saturate(.9) brightness(1.12); transition: filter .8s ease; }
+.environment-day .systems-visual { background: linear-gradient(180deg, rgba(76,145,166,.72), rgba(91,82,64,.82)); }
+.environment-day .mini-rover { box-shadow: 0 13px 0 rgba(30,22,13,.28), 0 0 26px rgba(95,240,255,.2); }
+.environment-day .visual-readout,
+.environment-day .map-label { background: rgba(3,20,31,.86); color: #b9f3ff; }
+.environment-day .hero-copy,
+.environment-day .systems-hero p,
+.environment-day .tracking-hero p,
+.environment-day .telemetry-copy,
+.environment-day .detail-explanation p { color: rgba(228,252,255,.76); }
+.environment-day .battery-bar,
+.environment-day .utility-bar { background: rgba(161,236,251,.14); }
+.environment-day .demo-control select { background: rgba(3,20,31,.86); color: #b9f3ff; border-color: rgba(161,236,251,.42); }
+@media (max-width: 800px) { .environmentControl { order: 3; width: 100%; justify-content: flex-end; margin: 0 0 5px; } }

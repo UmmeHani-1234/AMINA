@@ -1,0 +1,25 @@
+.wide-layout { width: 100% !important; max-width: none !important; margin: 0 !important; }
+.wide-layout > div { width: 100%; max-width: none; }
+.wide-layout .dashboard-shell,
+.wide-layout .systems-page,
+.wide-layout .tracking-page,
+.wide-layout #launch,
+.wide-layout #upcoming,
+.wide-layout #history { width: 100%; max-width: none; }
+.satellite-layout { width: 100% !important; max-width: none !important; margin: 0 !important; }
+.satellite-layout .tracking-page { min-height: calc(100vh - 160px); }
+.satellite-layout .tracking-hero { padding-top: 0; }
+.satellite-layout .tracking-layout { grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr); min-height: calc(100vh - 310px); margin-top: 12px; }
+.satellite-layout .tracking-map { min-height: calc(100vh - 310px); }
+.satellite-layout .tracking-svg { height: calc(100vh - 390px); min-height: 520px; object-fit: cover; }
+.satellite-layout .tracking-side { align-content: stretch; grid-template-rows: auto 1fr; }
+.satellite-layout .tracking-events { min-height: 0; }
+@media (max-width: 900px) {
+  .satellite-layout .tracking-layout { grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr); }
+  .satellite-layout .tracking-svg { height: auto; min-height: 460px; }
+}
+@media (max-width: 700px) {
+  .satellite-layout .tracking-layout { grid-template-columns: 1fr; min-height: auto; }
+  .satellite-layout .tracking-map { min-height: auto; }
+  .satellite-layout .tracking-svg { min-height: 330px; }
+}
