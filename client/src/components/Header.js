@@ -7,7 +7,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Clickable from "./Clickable";
 import Centered from "./Centered";
-import { useMission } from "../context/MissionContext";
 
 const styles = theme => ({
   root: {
@@ -53,36 +52,6 @@ const styles = theme => ({
     fontSize: 9.5,
     fontWeight: "normal",
     letterSpacing: 2,
-  },
-  environmentControl: {
-    display: "flex",
-    alignItems: "center",
-    gap: 5,
-    flex: "0 0 auto",
-    marginLeft: 10,
-    lineHeight: "normal",
-    whiteSpace: "nowrap",
-  },
-  environmentLabel: {
-    display: "block",
-    marginRight: 6,
-    color: theme.color.content,
-    fontSize: 10,
-    letterSpacing: 1.2,
-  },
-  environmentButton: {
-    padding: "6px 11px",
-    border: "1px solid rgba(161,236,251,.35)",
-    background: "transparent",
-    color: theme.color.content,
-    cursor: "pointer",
-    fontFamily: '"Source Code Pro", monospace',
-    fontSize: 11,
-  },
-  environmentButtonActive: {
-    borderColor: "#b5ff74",
-    color: "#b5ff74",
-    background: "rgba(181,255,116,.12)",
   },
   clickable: {
     fontSize: 13,
@@ -151,10 +120,6 @@ const styles = theme => ({
     navOpen: {
       display: "flex",
     },
-    environmentControl: {
-      marginLeft: "auto",
-      marginRight: 0,
-    },
     img: {
       height: "44px !important",
     },
@@ -167,7 +132,6 @@ const styles = theme => ({
 
 const Header = props => {
   const { classes, onNav, ...rest } = props;
-  const { environment, setEnvironment } = useMission();
   const [menuOpen, setMenuOpen] = useState(false);
   return <ArwesHeader animate>
     <Centered className={classes.root} {...rest}>
@@ -180,11 +144,6 @@ const Header = props => {
         <div className={classes.banner}>AMINA-LUNAR<span className={classes.subtitle}>MISSION CONTROL</span></div>
       </div>
       <button className={classes.menuButton} type="button" onClick={() => setMenuOpen(value => !value)} aria-expanded={menuOpen}>MENU</button>
-      <div className={classes.environmentControl} aria-label="Mission environment">
-        <span className={classes.environmentLabel}>MISSION ENVIRONMENT</span>
-        <button className={`${classes.environmentButton} ${environment === "day" ? classes.environmentButtonActive : ""}`} onClick={() => setEnvironment("day")} type="button">DAY</button>
-        <button className={`${classes.environmentButton} ${environment === "night" ? classes.environmentButtonActive : ""}`} onClick={() => setEnvironment("night")} type="button">NIGHT</button>
-      </div>
       <nav className={`${classes.nav} ${menuOpen ? classes.navOpen : ""}`}>
         <Clickable className={classes.clickable} onClick={onNav}>
           <Highlight className={classes.button} animate layer="header">
