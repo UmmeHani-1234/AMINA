@@ -28,14 +28,16 @@ import Tracking from "./Tracking";
 import History from "./History";
 import Upcoming from "./Upcoming";
 import "./SatelliteLayout.css";
+import "./DataSpread.css";
 import "../OperationsOnly.css";
 
 const styles = () => ({
   content: {
     display: "flex",
     flexDirection: "column",
+    width: "100%",
     height: "100vh",
-    margin: "auto",
+    margin: 0,
   },
   centered: {
     flex: 1,
@@ -84,7 +86,7 @@ const EnvironmentShell = ({ classes, location, frameVisible, animateFrame, plane
         corners={4} 
         style={{visibility: frameVisible ? "visible" : "hidden", width: "100%", boxSizing: "border-box"}}>
         {anim => (
-          <div style={{padding: isSatelliteView ? "16px 12px" : "28px", width: "100%", boxSizing: "border-box"}}>
+          <div style={{padding: isSatelliteView ? "16px 12px" : "clamp(16px, 2vw, 28px)", width: "100%", minHeight: "100%", boxSizing: "border-box"}}>
           <Switch>
             <Route exact path="/">
               <Dashboard entered={anim.entered} />

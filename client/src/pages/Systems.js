@@ -3,6 +3,8 @@ import { Appear } from "arwes";
 import { useMission } from "../context/MissionContext";
 import "./Systems.css";
 import "./PlatformVisuals.css";
+import "./CubeSatVisual.css";
+import "./RoverOverview.css";
 import "./ModelLinks.css";
 import "./VehicleMotion.css";
 import MissionFeed from "./MissionFeed";
@@ -26,7 +28,7 @@ const Systems = ({ entered, type }) => {
   const rows = useMemo(() => config.sections.map((row, index) => ({ row, index })), [config]);
 
   return <Appear animate show={entered}>
-    <div className="systems-page">
+    <div className={`systems-page ${type === "rover" ? "rover-overview" : ""}`}>
       <div className="systems-hero"><div><span className="eyebrow">AMINA-LUNAR / {config.kicker}</span><h1>{config.title}</h1><p>{config.summary}</p></div><div className="system-code">{config.code}<small>{current.status} · {current.battery}% POWER</small></div></div>
       <div className="system-tabs">{Object.entries(configs).map(([key, value]) => <a className={key === type ? "active" : ""} href={`/${key}`} key={key}>{value.code}</a>)}<a href="/tracking">TRACK</a><a href="/satellite">ORBIT</a></div>
       <div className="system-cards">{config.cards.map(([label, value, note]) => <div className="system-card" key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>

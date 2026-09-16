@@ -1,0 +1,11 @@
+.rover-marker { filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .85)) drop-shadow(0 0 6px var(--bright)); }
+.tracker-rover-shadow { fill: rgba(0, 0, 0, .58); stroke: none; }
+.tracker-suspension, .tracker-antenna { fill: none; stroke: #7d999b; stroke-width: 2; stroke-linecap: round; }
+.tracker-chassis { fill: #9ca9a7; stroke: #e4fcff; stroke-width: 1.4; }
+.tracker-deck { fill: #52696b; stroke: #b9d7d8; stroke-width: 1; }
+.tracker-mast { fill: #809698; stroke: none; }
+.tracker-camera { fill: #20383b; stroke: #d4eeee; stroke-width: 1; }
+.tracker-lens { fill: var(--bright); stroke: none; }
+.tracker-panel { fill: #25485a; stroke: #73b7cc; stroke-width: .8; }
+.tracker-wheel { fill: #101719; stroke: #a1ecfb; stroke-width: 1.3; }
+.tracker-hub { fill: none; stroke: #d4eeee; stroke-width: 1.3; stroke-linecap: round; }

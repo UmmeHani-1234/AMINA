@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Appear } from "arwes";
 import { useMission } from "../context/MissionContext";
 import "./Tracking.css";
+import "./TrackingRover.css";
+import "./TrackingOrbit.css";
 import "./SatelliteLayout.css";
 import "./ScienceCapture.css";
 import "./ScienceImageAssets.css";
@@ -20,9 +22,58 @@ const scienceFrames = [
   ["/img/images%20(3).jpg", "IMG_004.jpg", "Stratification"], ["/img/images%20(4).jpg", "IMG_005.jpg", "Horizon View"], ["/img/images%20(5).jpg", "IMG_006.jpg", "Target Context"],
 ];
 
-const RoverVisual = ({ progress }) => <svg className="tracking-svg" viewBox="0 0 760 410" role="img" aria-label="Simulated AMINA rover moving across a terrain map"><defs><pattern id="rover-grid" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M 38 0 L 0 0 0 38" fill="none" stroke="rgba(161,236,251,.09)" strokeWidth="1" /></pattern></defs><rect width="760" height="410" fill="url(#rover-grid)" /><path className="track-contour" d="M-20 300 C120 160 200 350 330 230 S540 110 790 180" /><path className="track-contour" d="M-20 350 C120 220 205 390 350 280 S575 180 790 250" /><path className="planned-route" d="M86 320 C180 294 240 232 330 254 S470 306 580 198 S660 120 690 86" /><path className="alternate-route" d="M86 320 C180 294 260 160 370 160 S515 144 690 86" /><path className="travelled-route" d={`M86 320 C${86 + progress * 90} ${320 - progress * 25} ${170 + progress * 120} ${294 - progress * 62} ${86 + progress * 504} ${320 - progress * 234}`} /><circle className="tracking-hazard" cx="420" cy="222" r="28" /><circle className="tracking-target" cx="690" cy="86" r="11" /><g transform={`translate(${86 + progress * 504} ${320 - progress * 234})`} className="rover-marker"><rect x="-25" y="-13" width="50" height="24" rx="3" /><rect x="-10" y="-27" width="20" height="15" /><circle cx="-18" cy="15" r="8" /><circle cx="0" cy="15" r="8" /><circle cx="18" cy="15" r="8" /><path d="M0-27 L0-39" /><circle cx="0" cy="-41" r="3" /></g><text x="24" y="38" className="map-title">ROVER POSITION / LOCAL TERRAIN FRAME</text><text x="590" y="65" className="map-label-svg">NEXT WAYPOINT</text><text x="380" y="208" className="map-label-svg hazard-label-svg">HAZARD</text></svg>;
+const RoverMarker = ({ x, y }) => <g transform={`translate(${x} ${y}) rotate(-13)`} className="rover-marker"><ellipse className="tracker-rover-shadow" cx="0" cy="15" rx="31" ry="7" /><path className="tracker-suspension" d="M-28 7H28 M-22 7L-18 15 M-8 7L-5 15 M7 7L10 15 M21 7L24 15" /><path className="tracker-chassis" d="M-29-7L-19-16H19L29-7V7H-29Z" /><path className="tracker-deck" d="M-18-16H18L22-7H-22Z" /><rect className="tracker-mast" x="-3" y="-31" width="6" height="15" rx="1" /><rect className="tracker-camera" x="-8" y="-36" width="16" height="8" rx="2" /><circle className="tracker-lens" cx="4" cy="-32" r="2" /><rect className="tracker-panel" x="-14" y="-13" width="16" height="6" rx="1" /><path className="tracker-antenna" d="M13-16L18-30" /><circle className="tracker-lens" cx="18" cy="-31" r="2" /><circle className="tracker-wheel" cx="-21" cy="15" r="7" /><circle className="tracker-wheel" cx="0" cy="15" r="7" /><circle className="tracker-wheel" cx="21" cy="15" r="7" /><path className="tracker-hub" d="M-24 15H-18 M-3 15H3 M18 15H24" /></g>;
 
-const SatelliteVisual = ({ progress, fault }) => { const angle = progress * Math.PI * 2; const x = 380 + Math.cos(angle) * 230; const y = 205 + Math.sin(angle) * 105; return <svg className="tracking-svg" viewBox="0 0 760 410" role="img" aria-label="Simulated CubeSat in orbit"><defs><radialGradient id="planet-glow"><stop offset="0" stopColor="#294f5e" /><stop offset="1" stopColor="#07151c" /></radialGradient></defs><rect width="760" height="410" fill="#031119" /><ellipse className="orbit-path" cx="380" cy="205" rx="285" ry="135" /><ellipse className="orbit-path orbit-secondary" cx="380" cy="205" rx="220" ry="105" /><circle cx="380" cy="205" r="112" fill="url(#planet-glow)" stroke="rgba(161,236,251,.48)" /><path className="planet-line" d="M288 178 C340 150 400 170 470 140 M290 238 C340 260 420 240 478 260" /><g transform={`translate(${x} ${y})`} className={fault ? "sat-marker fault" : "sat-marker"}><rect x="-18" y="-16" width="36" height="32" rx="2" /><rect x="-39" y="-8" width="17" height="16" /><rect x="22" y="-8" width="17" height="16" /><path d="M0-16 L0-29 M0 16 L0 29" /><circle cx="0" cy="-32" r="3" /></g><text x="24" y="38" className="map-title">1U CUBESAT-STYLE DEMONSTRATOR / ORBITAL FRAME</text><text x="486" y="82" className="map-label-svg">AMINA CUBESAT</text><text x="340" y="205" className="map-label-svg">PLANETARY BODY</text>{fault && <text x="25" y="378" className="fault-label-svg">THERMAL ANOMALY / SAFE MODE RESPONSE</text>}</svg>; };
+const RoverVisual = () => {
+  return <div style={{ position: "relative", width: "100%", minHeight: "195px", background: "#000" }}>
+    <video autoPlay muted loop playsInline style={{ display: "block", width: "100%", height: "100%", minHeight: "195px", objectFit: "cover" }}>
+      <source src="/img/rover-screen-recording.mp4" type="video/mp4" />
+    </video>
+    <div style={{
+      position: "absolute", top: 10, left: 14,
+      color: "rgba(95,240,255,0.85)", fontFamily: "'Source Code Pro', monospace",
+      fontSize: "10px", letterSpacing: "1.5px", textShadow: "0 0 8px rgba(95,240,255,0.7)",
+      pointerEvents: "none"
+    }}>
+      ROVER · LIVE FEED · SOL 042
+    </div>
+    <div style={{
+      position: "absolute", bottom: 10, right: 14,
+      color: "rgba(95,240,255,0.6)", fontFamily: "'Source Code Pro', monospace",
+      fontSize: "9px", letterSpacing: "1px",
+      pointerEvents: "none"
+    }}>
+      MOBILITY TELEMETRY · ACTIVE
+    </div>
+  </div>;
+};
+
+const CubeSatMarker = ({ x, y, fault }) => <g transform={`translate(${x} ${y}) rotate(-18)`} className={fault ? "sat-marker fault" : "sat-marker"}><path className="sat-comms-beam" d="M0 13L-64 77" /><rect className="sat-array" x="-55" y="-12" width="28" height="24" rx="1" /><rect className="sat-array" x="27" y="-12" width="28" height="24" rx="1" /><path className="sat-cell-lines" d="M-48-12V12M-41-12V12M-34-12V12M-55 0H-27M34-12V12M41-12V12M48-12V12M27 0H55" /><rect className="sat-bus" x="-27" y="-19" width="54" height="38" rx="3" /><rect className="sat-forward-panel" x="-20" y="-12" width="40" height="19" rx="1" /><circle className="sat-optics" cx="12" cy="-3" r="5" /><path className="sat-antenna" d="M-12-19L-18-34 M-18-34L-23-37 M-18-34L-13-38 M0 19L0 31" /><circle className="sat-status-light" cx="-11" cy="12" r="2" /></g>;
+
+const SatelliteVisual = () => {
+  return <div style={{ position: "relative", width: "100%", height: "100%", minHeight: "390px", background: "#000" }}>
+    <video autoPlay muted loop playsInline style={{ display: "block", width: "100%", height: "100%", minHeight: "390px", objectFit: "cover" }}>
+      <source src="/img/iss-timelapse.mp4" type="video/mp4" />
+      <source src="/img/videoplayback (3).mp4" type="video/mp4" />
+    </video>
+    <div style={{
+      position: "absolute", top: 10, left: 14,
+      color: "rgba(95,240,255,0.85)", fontFamily: "'Source Code Pro', monospace",
+      fontSize: "10px", letterSpacing: "1.5px", textShadow: "0 0 8px rgba(95,240,255,0.7)",
+      pointerEvents: "none"
+    }}>
+      ISS · LIVE FEED · 412 km ALT
+    </div>
+    <div style={{
+      position: "absolute", bottom: 10, right: 14,
+      color: "rgba(95,240,255,0.6)", fontFamily: "'Source Code Pro', monospace",
+      fontSize: "9px", letterSpacing: "1px",
+      pointerEvents: "none"
+    }}>
+      FULL MOON PASS · EUROPE / MIDDLE EAST
+    </div>
+  </div>;
+};
 
 const Tracking = ({ entered, mode }) => {
   const satellite = mode === "satellite";

@@ -1,0 +1,22 @@
+.orbital-svg { background: #02080d; }
+.satellite-layout .tracking-map { background-image: none; }
+.satellite-layout .orbital-svg { background: transparent; }
+.satellite-layout .orbital-svg > rect, .satellite-layout .orbital-svg .star-field { display: none; }
+.star-field { fill: rgba(210, 244, 255, .78); }
+.planet-atmosphere { fill: none; stroke: rgba(105, 221, 255, .4); stroke-width: 10; filter: drop-shadow(0 0 8px rgba(95, 240, 255, .32)); }
+.planet-surface { stroke: #a5c5cb; stroke-width: 1.4; }
+.planet-terrain { fill: none; stroke: rgba(202, 227, 227, .34); stroke-width: 3; }
+.planet-crater { fill: rgba(8, 18, 23, .35); stroke: rgba(194, 221, 221, .25); stroke-width: 2; }
+.planet-terminator { fill: rgba(1, 7, 11, .72); }
+.planet-limb { fill: none; stroke: rgba(219, 252, 255, .63); stroke-width: 2; stroke-linecap: round; }
+.planet-label, .orbit-readout { fill: rgba(193, 235, 244, .72); font: 9px "Source Code Pro"; letter-spacing: 1px; }
+.sat-marker { filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .85)) drop-shadow(0 0 7px rgba(95, 240, 255, .75)); }
+.sat-array { fill: #173f67; stroke: #81c5dc; stroke-width: 1; }
+.sat-cell-lines { fill: none; stroke: rgba(185, 235, 249, .7); stroke-width: .65; }
+.sat-bus { fill: #b8c5c3; stroke: #eefefd; stroke-width: 1.2; }
+.sat-forward-panel { fill: #586d70; stroke: #d6ecea; stroke-width: .8; }
+.sat-optics { fill: #07151c; stroke: #5ff0ff; stroke-width: 1.2; }
+.sat-antenna { fill: none; stroke: #d5ece9; stroke-width: 1.2; stroke-linecap: round; }
+.sat-status-light { fill: #b5ff74; stroke: #eaffdd; stroke-width: .6; }
+.sat-comms-beam { fill: none; stroke: rgba(95, 240, 255, .45); stroke-width: 1.2; stroke-dasharray: 4 4; }
+.sat-marker.fault .sat-status-light { fill: #ff7373; }

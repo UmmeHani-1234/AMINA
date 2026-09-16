@@ -1,0 +1,10 @@
+.visual-cubesat { background: radial-gradient(ellipse at 50% 48%, rgba(95, 240, 255, .14), transparent 33%), linear-gradient(145deg, #081b25, #020b11); }
+.visual-cubesat .visual-grid { opacity: .36; }
+.mini-cubesat { width: 86px; height: 94px; border: 1px solid #d7eeee; border-radius: 4px; background: linear-gradient(120deg, #d1dddd 0 12%, #758a8d 13% 48%, #344e52 49% 100%); box-shadow: 11px 12px 0 rgba(2, 9, 13, .45), 0 0 28px rgba(95, 240, 255, .28); transform: translate(-50%, -50%) rotate(12deg) skewY(-2deg); }
+.mini-cubesat::before, .mini-cubesat::after { top: 25px; width: 55px; height: 38px; border: 1px solid #9fd9ed; border-radius: 1px; background: repeating-linear-gradient(90deg, rgba(155, 224, 243, .72) 0 1px, transparent 1px 11px), repeating-linear-gradient(0deg, rgba(155, 224, 243, .62) 0 1px, transparent 1px 12px), linear-gradient(135deg, #143b67, #06172e); box-shadow: 0 2px 5px rgba(0, 0, 0, .55); }
+.mini-cubesat::before { left: -57px; }.mini-cubesat::after { right: -57px; }
+.mini-cubesat span { top: -31px; left: 40px; width: 5px; height: 31px; border: 1px solid #d5eeee; background: #5a777b; box-shadow: none; }
+.mini-cubesat span::before { position: absolute; top: -8px; left: -5px; width: 13px; height: 8px; border: 1px solid #d5eeee; border-radius: 50%; content: ""; background: #1e383d; }
+.mini-cubesat b { bottom: 14px; width: 21px; height: 14px; border: 1px solid #bfeef2; border-radius: 50%; background: radial-gradient(circle at 50% 45%, #071319 0 35%, #5ff0ff 37% 43%, #263f43 45%); box-shadow: 0 0 8px rgba(95, 240, 255, .32); }
+.mini-cubesat b:nth-of-type(1) { left: 10px; }.mini-cubesat b:nth-of-type(2) { right: 10px; }
+.satellite-moving { animation-duration: 5.5s; }
