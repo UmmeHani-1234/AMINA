@@ -83,7 +83,7 @@ const Dashboard = ({ entered }) => {
       <section className="video-feeds-section">
         <div className="panel-heading video-feeds-heading">
           <div><span className="section-index">00</span><h2>LIVE VIDEO FEEDS</h2></div>
-          <span className="status-chip"><span className="live-dot" style={{ width: 5, height: 5 }} /> 3 ACTIVE FEEDS</span>
+          <span className="status-chip"><span className="live-dot" style={{ width: 5, height: 5 }} /> 4 ACTIVE FEEDS</span>
         </div>
         <div className="video-feeds-grid">
           <div className="video-feed-card video-feed-primary">
@@ -98,6 +98,16 @@ const Dashboard = ({ entered }) => {
             <div className="video-feed-footer">
               <b style={{ color: "#b5ff74", marginRight: 6 }}>● ACTIVE STREAM</b> &middot; MOBILITY TELEMETRY &middot; SOL 042 &middot; 18:47 UTC
             </div>
+          </div>
+          <div className="video-feed-card">
+            <div className="video-feed-label">
+              <span className="live-dot" style={{ width: 5, height: 5, marginRight: 5 }} />
+              ROVER &middot; PLAYBACK 1
+            </div>
+            <video autoPlay muted loop playsInline className="video-feed-player">
+              <source src="/img/videoplayback (1).mp4" type="video/mp4" />
+            </video>
+            <div className="video-feed-footer">SURFACE CAM &middot; PLAYBACK 01 ARCHIVE</div>
           </div>
           <div className="video-feed-card">
             <div className="video-feed-label">
