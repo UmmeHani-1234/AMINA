@@ -35,20 +35,6 @@ const Dashboard = ({ entered }) => {
   return <Appear id="dashboard" animate show={entered}>
     <div className="dashboard-shell">
 
-      <section className="dashboard-hero">
-        <div>
-          <p className="eyebrow">AMINA-LUNAR / LIVE MISSION OPERATIONS</p>
-          <h1>Mission intelligence, in the loop.</h1>
-          <p className="hero-copy">AMINA does not just collect data. It uses data to make mission decisions, monitors itself, and changes its plan when conditions change.</p>
-        </div>
-        <div className="demo-control">
-          <span className="live-dot" /> DEMO MODE
-          <select value={scenario} onChange={event => runScenario(event.target.value)} aria-label="Choose simulation scenario">
-            {Object.entries(scenarioData).map(([key, value]) => <option key={key} value={key}>{value.label}</option>)}
-          </select>
-        </div>
-      </section>
-
       <section className="video-hero-banner">
         <video autoPlay muted loop playsInline className="video-hero-bg">
           <source src="/img/iss-timelapse.mp4" type="video/mp4" />
@@ -69,6 +55,39 @@ const Dashboard = ({ entered }) => {
             <span>PERIOD: 92.6 min</span>
             <span>INCLINATION: 51.6deg</span>
             <span>STATUS: <b style={{ color: "#b5ff74" }}>NOMINAL</b></span>
+          </div>
+        </div>
+      </section>
+
+      <section className="mission-modes-bar" aria-label="Mission simulation modes">
+        <div className="mode-bar-header">
+          <span className="live-dot" />
+          <span>SIMULATION MODE</span>
+        </div>
+        <div className="mode-bar-controls">
+          <div className="mode-bar-pills">
+            {Object.entries(scenarioData).map(([key, value]) => (
+              <button
+                key={key}
+                type="button"
+                className={`mode-pill ${scenario === key ? "active" : ""}`}
+                onClick={() => runScenario(key)}
+              >
+                {value.label}
+              </button>
+            ))}
+          </div>
+          <div className="mode-bar-select-wrap">
+            <select
+              value={scenario}
+              onChange={event => runScenario(event.target.value)}
+              aria-label="Choose simulation scenario"
+              className="mode-bar-select"
+            >
+              {Object.entries(scenarioData).map(([key, value]) => (
+                <option key={key} value={key}>{value.label}</option>
+              ))}
+            </select>
           </div>
         </div>
       </section>
