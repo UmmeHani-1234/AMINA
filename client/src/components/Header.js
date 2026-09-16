@@ -13,20 +13,21 @@ const styles = theme => ({
   root: {
     display: "flex",
     flexDirection: "row",
-    lineHeight: "80px",
+    lineHeight: "96px",
+    minHeight: "96px",
     alignItems: "center",
-    gap: 12,
+    gap: 16,
     width: "100%",
     maxWidth: "none",
-    padding: [0, 26],
+    padding: [0, 32],
     boxSizing: "border-box",
-    borderBottom: "1px solid rgba(161,236,251,.16)",
+    borderBottom: "1px solid rgba(161,236,251,.2)",
   },
   brand: {
     display: "flex",
     alignItems: "center",
     flex: "0 0 auto",
-    gap: 8,
+    gap: 10,
     lineHeight: "normal",
   },
   nav: {
@@ -34,63 +35,63 @@ const styles = theme => ({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    gap: 1,
+    gap: 3,
     minWidth: 0,
   },
   banner: {
     display: "grid",
-    gap: 2,
+    gap: 3,
     fontWeight: "bold",
     color: "#e4fcff",
-    fontSize: 17,
+    fontSize: 21,
     lineHeight: 1,
     whiteSpace: "nowrap",
   },
   subtitle: {
-    color: "rgba(161,236,251,.62)",
+    color: "rgba(161,236,251,.65)",
     fontFamily: '"Source Code Pro", monospace',
-    fontSize: 8,
+    fontSize: 9.5,
     fontWeight: "normal",
-    letterSpacing: 1.5,
+    letterSpacing: 2,
   },
   environmentControl: {
     display: "flex",
     alignItems: "center",
-    gap: 4,
+    gap: 5,
     flex: "0 0 auto",
-    marginLeft: 8,
+    marginLeft: 10,
     lineHeight: "normal",
     whiteSpace: "nowrap",
   },
   environmentLabel: {
     display: "block",
-    marginRight: 4,
+    marginRight: 6,
     color: theme.color.content,
-    fontSize: 9,
-    letterSpacing: 1,
+    fontSize: 10,
+    letterSpacing: 1.2,
   },
   environmentButton: {
-    padding: "5px 7px",
+    padding: "6px 11px",
     border: "1px solid rgba(161,236,251,.35)",
     background: "transparent",
     color: theme.color.content,
     cursor: "pointer",
     fontFamily: '"Source Code Pro", monospace',
-    fontSize: 10,
+    fontSize: 11,
   },
   environmentButtonActive: {
     borderColor: "#b5ff74",
     color: "#b5ff74",
-    background: "rgba(181,255,116,.08)",
+    background: "rgba(181,255,116,.12)",
   },
   clickable: {
-    fontSize: 11,
+    fontSize: 13,
     lineHeight: "normal",
     whiteSpace: "nowrap",
     "& i": {
-      marginRight: 3,
-      fontSize: 14,
-      verticalAlign: "-2px",
+      marginRight: 4,
+      fontSize: 17,
+      verticalAlign: "-3px",
     },
   },
   link: {
@@ -98,39 +99,42 @@ const styles = theme => ({
     textDecoration: "none",
   },
   button: {
-    padding: [0, 5],
+    padding: [4, 7],
   },
   menuButton: {
     display: "none",
-    padding: "6px 8px",
+    padding: "8px 12px",
     border: "1px solid rgba(161,236,251,.35)",
     background: "transparent",
     color: theme.color.content,
     cursor: "pointer",
     fontFamily: '"Source Code Pro", monospace',
-    fontSize: 10,
+    fontSize: 11,
   },
-  "@media (max-width: 1180px)": {
+  "@media (max-width: 1250px)": {
     root: {
-      gap: 6,
-      padding: [0, 16],
+      gap: 10,
+      padding: [0, 18],
     },
     clickable: {
-      fontSize: 10,
+      fontSize: 11.5,
+      "& i": {
+        fontSize: 15,
+      },
     },
     button: {
-      padding: [0, 3],
+      padding: [2, 4],
     },
-    environmentLabel: {
-      display: "none",
+    banner: {
+      fontSize: 18,
     },
   },
   "@media (max-width: 900px)": {
     root: {
       flexWrap: "wrap",
-      minHeight: 70,
+      minHeight: 84,
       lineHeight: "normal",
-      padding: [8, 12],
+      padding: [10, 16],
     },
     menuButton: {
       display: "block",
@@ -141,7 +145,8 @@ const styles = theme => ({
       flex: "1 0 100%",
       justifyContent: "flex-start",
       flexWrap: "wrap",
-      paddingBottom: 8,
+      paddingBottom: 10,
+      gap: 6,
     },
     navOpen: {
       display: "flex",
@@ -151,12 +156,12 @@ const styles = theme => ({
       marginRight: 0,
     },
     img: {
-      height: "36px !important",
+      height: "44px !important",
     },
     button: {
-      padding: [0, 8],
+      padding: [4, 10],
     },
-    clickable: { fontSize: 12 },
+    clickable: { fontSize: 13 },
   },
 });
 
@@ -168,7 +173,7 @@ const Header = props => {
     <Centered className={classes.root} {...rest}>
       <img src="/favicon.png" alt="" className={classes.img} style={{
         margin: 0,
-        height: "38px",
+        height: "48px",
         width: "auto",
       }} />
       <div className={classes.brand}>
