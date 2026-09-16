@@ -7,3 +7,5 @@ server/.env
 server/public/img/*.mp4
 client/public/img/recording-1.mp4
 client/public/img/recording-2.mp4
+*.bkp
+.$*
