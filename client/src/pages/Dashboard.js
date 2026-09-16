@@ -86,19 +86,28 @@ const Dashboard = ({ entered }) => {
           <span className="status-chip"><span className="live-dot" style={{ width: 5, height: 5 }} /> 2 ACTIVE FEEDS</span>
         </div>
         <div className="video-feeds-grid">
+          <div className="video-feed-card video-feed-primary">
+            <div className="video-feed-label">
+              <span className="live-dot" style={{ width: 6, height: 6, marginRight: 6 }} />
+              <strong style={{ color: "#b5ff74", marginRight: 8, letterSpacing: "1.5px" }}>[PRIMARY FEED]</strong>
+              ROVER &middot; LATEST TELEMETRY
+            </div>
+            <video autoPlay muted loop playsInline className="video-feed-player">
+              <source src="/img/recording-3.mp4" type="video/mp4" />
+            </video>
+            <div className="video-feed-footer">
+              <b style={{ color: "#b5ff74", marginRight: 6 }}>● ACTIVE STREAM</b> &middot; MOBILITY TELEMETRY &middot; SOL 042 &middot; 18:47 UTC
+            </div>
+          </div>
           <div className="video-feed-card">
-            <div className="video-feed-label"><span className="live-dot" style={{ width: 5, height: 5, marginRight: 5 }} />ISS &middot; ORBITAL TIMELAPSE</div>
+            <div className="video-feed-label">
+              <span className="live-dot" style={{ width: 5, height: 5, marginRight: 5 }} />
+              ISS &middot; ORBITAL TIMELAPSE
+            </div>
             <video autoPlay muted loop playsInline className="video-feed-player">
               <source src="/img/iss-timelapse.mp4" type="video/mp4" />
             </video>
             <div className="video-feed-footer">FULL MOON PASS &middot; EUROPE / MIDDLE EAST &middot; JAN 2025</div>
-          </div>
-          <div className="video-feed-card">
-            <div className="video-feed-label"><span className="live-dot" style={{ width: 5, height: 5, marginRight: 5 }} />ROVER &middot; SESSION 3</div>
-            <video autoPlay muted loop playsInline className="video-feed-player">
-              <source src="/img/recording-3.mp4" type="video/mp4" />
-            </video>
-            <div className="video-feed-footer">MOBILITY TELEMETRY &middot; SOL 042 &middot; 18:47 UTC</div>
           </div>
         </div>
       </section>
