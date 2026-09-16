@@ -101,11 +101,11 @@ const Dashboard = ({ entered }) => {
             <div className="video-feed-footer">MOBILITY TELEMETRY &middot; SOL 042 &middot; 18:17 UTC</div>
           </div>
           <div className="video-feed-card">
-            <div className="video-feed-label"><span className="live-dot" style={{ width: 5, height: 5, marginRight: 5 }} />ROVER &middot; SESSION 2</div>
+            <div className="video-feed-label"><span className="live-dot" style={{ width: 5, height: 5, marginRight: 5 }} />ROVER &middot; SESSION 3</div>
             <video autoPlay muted loop playsInline className="video-feed-player">
-              <source src="/img/recording-2.mp4" type="video/mp4" />
+              <source src="/img/recording-3.mp4" type="video/mp4" />
             </video>
-            <div className="video-feed-footer">MOBILITY TELEMETRY &middot; SOL 042 &middot; 18:32 UTC</div>
+            <div className="video-feed-footer">MOBILITY TELEMETRY &middot; SOL 042 &middot; 18:47 UTC</div>
           </div>
         </div>
       </section>
