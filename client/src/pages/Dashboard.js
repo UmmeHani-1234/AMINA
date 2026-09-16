@@ -134,33 +134,93 @@ const Dashboard = ({ entered }) => {
 
       <section className="dashboard-grid top-grid">
         <div className="panel map-panel">
-          <div className="panel-heading"><div><span className="section-index">01</span><h2>LIVE TERRAIN / MAP</h2></div><span className="status-chip">SIMULATED TERRAIN</span></div>
-          <div className="terrain-map">
-            <div className="map-label explored">EXPLORED REGION</div><div className="map-label destination">TARGET #{selected.id}</div><div className="map-label rover-label">ROVER / 64%</div>
-            <svg viewBox="0 0 700 330" role="img" aria-label="Simulated terrain map with rover route and target">
-              <path className="contour" d="M-20 220 C100 120 180 280 300 170 S520 80 740 170" /><path className="contour" d="M-20 265 C110 165 180 325 325 220 S545 135 740 225" />
-              <path className={current.hazard ? "route route-alert" : "route"} d={current.hazard ? "M88 248 C200 235 260 100 390 132 S510 220 618 84" : "M88 248 C200 235 260 188 390 195 S510 150 618 84"} />
-              <g className="map-rover" transform="translate(88 248) rotate(-13)" aria-label="AMINA six-wheel exploration rover">
-                <ellipse className="rover-shadow" cx="0" cy="13" rx="29" ry="7" />
-                <path className="rover-suspension" d="M-27 7 H27 M-21 7 L-14 15 M-7 7 L0 15 M7 7 L14 15 M21 7 L28 15" />
-                <path className="rover-chassis" d="M-28-7 L-19-15 H19 L28-7 V6 H-28Z" />
-                <path className="rover-deck" d="M-17-15 H17 L21-7 H-21Z" />
-                <rect className="rover-camera-mast" x="-3" y="-30" width="6" height="15" rx="1" />
-                <rect className="rover-camera" x="-8" y="-35" width="16" height="7" rx="2" />
-                <circle className="rover-lens" cx="4" cy="-31.5" r="2" />
-                <rect className="rover-panel" x="-14" y="-12" width="16" height="6" rx="1" />
-                <path className="rover-antenna" d="M13-15 L18-29" />
-                <circle className="rover-antenna-tip" cx="18" cy="-30" r="2" />
-                <circle className="rover-wheel" cx="-21" cy="15" r="7" /><circle className="rover-wheel" cx="0" cy="15" r="7" /><circle className="rover-wheel" cx="21" cy="15" r="7" />
-                <path className="rover-wheel-hub" d="M-24 15H-18 M-3 15H3 M18 15H24" />
-              </g>
-              <circle className="target-point" cx="618" cy="84" r="10" />
-              <circle className="hazard-point" cx="390" cy="132" r={current.hazard ? 24 : 0} />
-              <path className="explored-line" d="M88 248 L170 228 L250 235" />
-            </svg>
-            {current.hazard && <div className="hazard-callout">HAZARD DETECTED<br /><b>REROUTING</b></div>}
+          <div className="panel-heading">
+            <div><span className="section-index">01</span><h2>LIVE TERRAIN / MAP</h2></div>
+            <span className="status-chip">HiRISE ORBITAL TOPOGRAPHY &middot; 0.25 m/px</span>
           </div>
-          <div className="map-legend"><span><i className="key rover-key" />ROVER</span><span><i className="key target-key" />SCIENCE TARGET</span><span><i className="key hazard-key" />HIGH-RISK TERRAIN</span><span><i className="key route-key" />PLANNED PATH</span></div>
+          <div className="terrain-map terrain-map-real">
+            <img src="/img/mars-terrain-map.jpg" alt="HiRISE Orbital Mars Jezero Crater Terrain" className="terrain-photo-bg" />
+            <div className="terrain-photo-overlay" />
+            <div className="terrain-hud-grid" />
+
+            <div className="map-label explored">EXPLORED CORRIDOR &middot; SOL 042</div>
+            <div className="map-label destination">TARGET #{selected.id} &middot; {selected.name.toUpperCase()}</div>
+            <div className="map-label rover-label">AMINA ROVER &middot; {current.battery}% PWR</div>
+            <div className="map-coords-top">LAT: 18&deg;23'42.1"N &middot; LON: 77&deg;27'14.8"E</div>
+            <div className="map-coords-bottom">ELEV: -2,560 m &middot; RES: 0.25 m/px &middot; TRAVERSABILITY: 84%</div>
+
+            <svg viewBox="0 0 700 330" className="terrain-hud-svg" role="img" aria-label="Authentic Mars Jezero Crater traverse map with AMINA route and target">
+              <defs>
+                <radialGradient id="hazardGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="rgba(255,100,100,0.5)" />
+                  <stop offset="70%" stopColor="rgba(255,100,100,0.2)" />
+                  <stop offset="100%" stopColor="rgba(255,100,100,0)" />
+                </radialGradient>
+                <pattern id="hazardHatch" width="12" height="12" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                  <line x1="0" y1="0" x2="0" y2="12" stroke="rgba(255,115,115,0.4)" strokeWidth="2" />
+                </pattern>
+              </defs>
+
+              <g className="hud-crosshairs" stroke="rgba(161,236,251,0.25)" strokeWidth="1">
+                <path d="M100 70 H120 M110 60 V80" />
+                <path d="M350 70 H370 M360 60 V80" />
+                <path d="M580 70 H600 M590 60 V80" />
+                <path d="M100 250 H120 M110 240 V260" />
+                <path d="M350 250 H370 M360 240 V260" />
+                <path d="M580 250 H600 M590 240 V260" />
+              </g>
+
+              <path className="explored-track" d="M30 290 L60 270 L95 245 L115 235" />
+
+              <path
+                className={current.hazard ? "route route-alert" : "route"}
+                d={current.hazard ? "M115 235 C200 220 250 90 390 120 S510 200 605 92" : "M115 235 C210 220 280 170 390 180 S510 140 605 92"}
+              />
+
+              {current.hazard && (
+                <g className="hazard-zone">
+                  <circle cx="390" cy="120" r="38" fill="url(#hazardGlow)" />
+                  <circle cx="390" cy="120" r="38" fill="url(#hazardHatch)" stroke="var(--red)" strokeWidth="1.5" strokeDasharray="5 3" />
+                  <circle cx="390" cy="120" r="4" fill="var(--red)" />
+                </g>
+              )}
+
+              <g className="tactical-rover" transform="translate(115 235)">
+                <line x1="0" y1="0" x2="26" y2="-12" stroke="var(--cyan-bright)" strokeWidth="2" strokeDasharray="3 2" />
+                <polygon points="26,-12 21,-16 23,-11 19,-9" fill="var(--cyan-bright)" />
+                <circle cx="0" cy="0" r="16" fill="rgba(3,18,25,0.7)" stroke="var(--cyan-bright)" strokeWidth="1.5" />
+                <circle cx="0" cy="0" r="22" fill="none" stroke="rgba(95,240,255,0.4)" strokeWidth="1" strokeDasharray="4 4" />
+                <line x1="0" y1="-20" x2="0" y2="-13" stroke="var(--cyan-bright)" strokeWidth="1.5" />
+                <line x1="0" y1="13" x2="0" y2="20" stroke="var(--cyan-bright)" strokeWidth="1.5" />
+                <line x1="-20" y1="0" x2="-13" y2="0" stroke="var(--cyan-bright)" strokeWidth="1.5" />
+                <line x1="13" y1="0" x2="20" y2="0" stroke="var(--cyan-bright)" strokeWidth="1.5" />
+                <circle cx="0" cy="0" r="3.5" fill="var(--cyan-bright)" />
+                <text x="0" y="34" fill="var(--cyan-bright)" fontSize="9" textAnchor="middle" fontFamily="'Source Code Pro', monospace" fontWeight="600" letterSpacing="1">ROVER FIX</text>
+              </g>
+
+              <g className="tactical-target" transform="translate(605 92)">
+                <circle cx="0" cy="0" r="14" fill="rgba(3,18,25,0.7)" stroke="var(--green)" strokeWidth="1.5" />
+                <circle cx="0" cy="0" r="20" fill="none" stroke="rgba(181,255,116,0.5)" strokeWidth="1" strokeDasharray="3 3" />
+                <path d="M-10 -7 V-10 H-7 M7 -10 H10 V-7 M10 7 V10 H7 M-7 10 H-10 V7" fill="none" stroke="var(--green)" strokeWidth="2" />
+                <circle cx="0" cy="0" r="3" fill="var(--green)" />
+                <text x="0" y="-16" fill="var(--green)" fontSize="9" textAnchor="middle" fontFamily="'Source Code Pro', monospace" fontWeight="600" letterSpacing="1">TARGET #{selected.id}</text>
+                <text x="0" y="32" fill="rgba(181,255,116,0.85)" fontSize="8" textAnchor="middle" fontFamily="'Source Code Pro', monospace">14.2 m &middot; 078&deg; AZ</text>
+              </g>
+            </svg>
+
+            {current.hazard && (
+              <div className="hazard-callout">
+                HAZARD DETECTED: ESCARPMENT (28&deg; SLOPE)<br />
+                <b>AUTONAV REROUTING ENGAGED</b>
+              </div>
+            )}
+          </div>
+          <div className="map-legend">
+            <span><i className="key rover-key" />AMINA ROVER (LOCAL FIX)</span>
+            <span><i className="key target-key" />TARGET #{selected.id} ({selected.name})</span>
+            <span><i className="key hazard-key" />HIGH-RISK ESCARPMENT</span>
+            <span><i className="key route-key" />AUTONAV CORRIDOR</span>
+          </div>
         </div>
 
         <div className="panel decision-panel">
