@@ -10,14 +10,98 @@ import "./VehicleMotion.css";
 import MissionFeed from "./MissionFeed";
 
 const configs = {
-  rover: { code: "ROV", title: "Rover Overview", kicker: "PHYSICAL PLATFORM / AMINA ROVER", summary: "Inspect the six-wheel exploration system and its onboard sensing stack.", accent: "ROVER ONLINE", modelUrl: "https://studio.tripo3d.ai/3d-model/5bdfe1d1-2aef-4c3d-bb9d-7f40d4225ac1?invite_code=CNMQR5", modelLabel: "OPEN ROVER MODEL", cards: [["Mobility", "6 / 6 wheels", "ROCKER-BOGIE INSPIRED"], ["Compute", "EDGE AI / SBC", "DECISION LOOP ONLINE"], ["Sensors", "7 / 7 online", "HEALTHY"], ["Uptime", "04:18:22", "SOL 042"]], sections: [["CAMERA", "Observation feed", "1280 x 720 · ONLINE"], ["LIDAR / DEPTH", "Terrain perception", "4.2 m range · LOCKED"], ["IMU", "Orientation estimate", "ROLL 1.2° · PITCH 0.8°"], ["SCIENCE PAYLOAD", "Spectral proxy", "TCS34725 · READY"]] },
+  rover: { code: "ROV", title: "Rover Overview", kicker: "PHYSICAL PLATFORM / AMINA ROVER", summary: "Inspect the six-wheel exploration system and its onboard sensing stack.", accent: "ROVER ONLINE", cards: [["Mobility", "6 / 6 wheels", "ROCKER-BOGIE INSPIRED"], ["Compute", "EDGE AI / SBC", "DECISION LOOP ONLINE"], ["Sensors", "7 / 7 online", "HEALTHY"], ["Uptime", "04:18:22", "SOL 042"]], sections: [["CAMERA", "Observation feed", "1280 x 720 · ONLINE"], ["LIDAR / DEPTH", "Terrain perception", "4.2 m range · LOCKED"], ["IMU", "Orientation estimate", "ROLL 1.2° · PITCH 0.8°"], ["SCIENCE PAYLOAD", "Spectral proxy", "TCS34725 · READY"]] },
   navigation: { code: "NAV", title: "Navigation & Terrain", kicker: "TRAVERSABILITY / ROUTE PLANNING", summary: "Compare terrain risk, energy cost, and scientific return before AMINA commits to a route.", accent: "ROUTE OPTIMISED", cards: [["Position", "14.2 N / 32.8 E", "LOCAL FRAME"], ["Speed", "0.18 m/s", "CRAWL MODE"], ["Traversability", "82%", "SAFE CORRIDOR"], ["Waypoints", "06 / 09", "TARGET #07"]], sections: [["TARGET A", "Science 92 · Risk LOW · Energy MEDIUM", "UTILITY 89"], ["TARGET B", "Science 96 · Risk HIGH · Energy HIGH", "UTILITY 61"], ["TARGET C", "Science 88 · Risk LOW · Energy MEDIUM", "UTILITY 92 / SELECTED"], ["ROUTE POLICY", "Preserve energy margin above 35%", "ACTIVE"]] },
   science: { code: "SCI", title: "Scientific Intelligence", kicker: "PERCEPTION / TARGET DETECTION", summary: "Turn camera observations into ranked science opportunities and actionable investigations.", accent: "4 TARGETS DETECTED", cards: [["Observation", "TARGET #07", "HYDRATED VEIN"], ["Confidence", "91%", "HIGH"], ["Science value", "87%", "PRIORITY 01"], ["Investigation", "14 m", "ENERGY 29%"]], sections: [["TARGET #07", "Hydrated vein · confidence 91% · accessibility 81%", "HIGH PRIORITY"], ["TARGET #01", "Basalt ridge · confidence 88% · accessibility 74%", "GOOD"], ["TARGET #03", "Layered outcrop · confidence 84% · visited", "MEMORY HIT"], ["OPPORTUNITY", "Unexpected feature · confidence 84% · value 92%", "REVIEW"]] },
   ai: { code: "AI", title: "Mission Decision Engine", kicker: "EXPLAINABLE AUTONOMY / UTILITY", summary: "See why AMINA selects one target over another instead of treating autonomy as a black box.", accent: "DECISION EXPLAINED", cards: [["Selected", "TARGET #07", "APPROACH"], ["Utility", "92", "TOP SCORE"], ["Confidence", "91%", "SUPPORTED"], ["Margin", "+18", "SAFE ENERGY"]], sections: [["SCIENCE VALUE", "+87", "HIGH CONTRIBUTION"], ["ACCESSIBILITY", "+81", "GOOD TRAVERSAL"], ["ENERGY / DISTANCE", "−43", "14 m APPROACH"], ["RISK", "−35", "WITHIN POLICY"]] },
   fdir: { code: "FDI", title: "Fault Detection, Isolation & Recovery", kicker: "ROVER HEALTH / RESILIENCE", summary: "Follow the complete path from an abnormal signal to an isolated subsystem and recovery action.", accent: "MONITORING", cards: [["Detection", "MOTOR CURRENT", "ABNORMAL"], ["Isolation", "LEFT REAR WHEEL", "CONFIRMED"], ["Recovery", "REDUCE / REVERSE", "RUNNING"], ["Outcome", "ROUTE REPLANNED", "MISSION SAFE"]], sections: [["14:32:08", "Left rear motor current rose above threshold", "DETECT"], ["14:32:09", "Fault isolated to left rear wheel", "ISOLATE"], ["14:32:11", "Rover speed reduced and wheel reversed", "RECOVER"], ["14:32:21", "Alternate path calculated; mission resumed", "RESOLVED"]] },
   energy: { code: "PWR", title: "Power & Energy Management", kicker: "ENERGY POLICY / MISSION MODE", summary: "Energy state directly changes what the rover is allowed to do next.", accent: "HIGH · EXPLORE BROADLY", cards: [["Reserve", "78%", "HIGH"], ["Voltage", "12.4 V", "STABLE"], ["Current", "1.8 A", "NOMINAL"], ["Policy", "EXPLORE", "BROADLY"]], sections: [["HIGH · 75–100%", "Explore broadly and investigate opportunities", "ACTIVE"], ["MEDIUM · 35–74%", "Balance science value and resource margin", "STANDBY"], ["LOW · 15–34%", "Stop optional exploration; prioritise return", "STANDBY"], ["CRITICAL · <15%", "Disable science and enter safe behaviour", "STANDBY"]] },
   telemetry: { code: "TLM", title: "Adaptive Telemetry", kicker: "COMMUNICATION / PRIORITY QUEUE", summary: "When the link is constrained, AMINA sends the information that protects the mission first.", accent: "BANDWIDTH LIMITED", cards: [["Link", "LIMITED", "SCHEDULED"], ["P1", "CRITICAL HEALTH", "SENDING"], ["P2", "SCIENCE RESULT", "SENDING"], ["P4", "FULL IMAGE", "DEFERRED"]], sections: [["P1 · CRITICAL", "Faults, battery, rover health, safe-state changes", "SEND NOW"], ["P2 · HIGH VALUE", "Target #07 science result and observation summary", "SEND NEXT"], ["P3 · ROUTINE", "Position, speed, environmental telemetry", "BATCH"], ["P4 · LOW", "Full-resolution imagery and non-critical detail", "DEFER"]] },
-  cubesat: { code: "SAT", title: "1U CubeSat-Style Demonstrator", kicker: "SECONDARY PLATFORM / SOFTWARE DEMONSTRATOR", summary: "Demonstrate how AMINA's autonomy and FDIR concepts transfer to a small spacecraft without presenting it as launched hardware.", accent: "MISSION MODE", modelUrl: "https://studio.tripo3d.ai/3d-model/b7f5f1b4-c174-40e5-aacd-7ae050102a7e?invite_code=CNMQR5", modelLabel: "OPEN CUBESAT MODEL", cards: [["Power", "83%", "NOMINAL"], ["Computer", "ONLINE", "HEALTHY"], ["Thermal", "24.8 °C", "STABLE"], ["State", "MISSION", "AUTONOMOUS"]], sections: [["SENSE", "Sensor and telemetry data", "COMPLETE"], ["ANALYSE", "Health assessment / anomaly check", "ACTIVE"], ["DECIDE", "Continue, delay, reconfigure, or safe mode", "READY"], ["ACT / MONITOR", "Apply action and verify recovery", "READY"]] },
+  cubesat: { code: "SAT", title: "1U CubeSat-Style Demonstrator", kicker: "SECONDARY PLATFORM / SOFTWARE DEMONSTRATOR", summary: "Demonstrate how AMINA's autonomy and FDIR concepts transfer to a small spacecraft without presenting it as launched hardware.", accent: "MISSION MODE", cards: [["Power", "83%", "NOMINAL"], ["Computer", "ONLINE", "HEALTHY"], ["Thermal", "24.8 °C", "STABLE"], ["State", "MISSION", "AUTONOMOUS"]], sections: [["SENSE", "Sensor and telemetry data", "COMPLETE"], ["ANALYSE", "Health assessment / anomaly check", "ACTIVE"], ["DECIDE", "Continue, delay, reconfigure, or safe mode", "READY"], ["ACT / MONITOR", "Apply action and verify recovery", "READY"]] },
+};
+
+const systemMeta = {
+  fdir: {
+    badge: "FAULT ISOLATION & DIAGNOSTICS",
+    source: "NASA JPL · MAHLI WHEEL INSPECTION",
+    tag: "WHEEL DRIVE ACTUATOR · ABNORMAL → ISOLATED → RECOVERING",
+    status: "RECOVERY POLICY ACTIVE",
+    telemetry: "MOTOR CURRENT: 3.4A (ISOLATED)"
+  },
+  navigation: {
+    badge: "TERRAIN PERCEPTION & NAVCAM",
+    source: "NASA CURIOSITY · STEREO NAVCAM DRIVE TRACKS",
+    tag: "TRAVERSABILITY 82% · SAFE CORRIDOR LOCKED",
+    status: "LOCAL WAYPOINT 06 / 09",
+    telemetry: "PITCH: 0.8° · ROLL: 1.2° · SPEED: 0.18 m/s"
+  },
+  science: {
+    badge: "SPECTRAL TARGETING & PERCEPTION",
+    source: "NASA CURIOSITY · CHEMCAM LASER TARGET ROCK",
+    tag: "TARGET #07 HYDRATED VEIN · CONFIDENCE 91%",
+    status: "SPECTRAL ANALYSIS COMPLETE",
+    telemetry: "PRIORITY: 01 HIGH · SCIENCE VALUE: 87%"
+  },
+  ai: {
+    badge: "AUTONOMOUS DECISION ENGINE",
+    source: "NASA PERSEVERANCE · AUTONAV HAZARD AVOIDANCE",
+    tag: "TARGET SELECTION UTILITY: 92 (OPTIMAL)",
+    status: "MULTI-CRITERIA DECISION COMPUTED",
+    telemetry: "UTILITY SCORE: 92 · ENERGY MARGIN: +18"
+  },
+  energy: {
+    badge: "POWER & ENERGY SUBSYSTEM",
+    source: "NASA JPL · MARS ROVER MMRTG POWER SYSTEM",
+    tag: "POWER BUS 12.4V · RESERVE 78% · EXPLORE BROADLY",
+    status: "NOMINAL POWER PROFILE",
+    telemetry: "CURRENT: 1.8A · VOLTAGE: 12.4V · MARGIN: 78%"
+  },
+  telemetry: {
+    badge: "COMMUNICATIONS & LINK TELEMETRY",
+    source: "NASA DEEP SPACE NETWORK · 70m ANTENNA GOLDSTONE",
+    tag: "ADAPTIVE PACKET QUEUE · P1 CRITICAL HEALTH SENDING",
+    status: "BANDWIDTH MANAGED",
+    telemetry: "SIGNAL LATENCY: 4.3m · LINK: LIMITED SCHEDULED"
+  },
+  cubesat: {
+    badge: "1U CUBESAT FLIGHT DEMONSTRATOR",
+    source: "NASA MarCO · INTERPLANETARY CUBESAT IN ORBIT",
+    tag: "AUTONOMOUS ATTITUDE & SUBSYSTEM TELEMETRY",
+    status: "ORBITAL FLIGHT NOMINAL",
+    telemetry: "THERMAL: 24.8°C · POWER: 83% · CPU: HEALTHY"
+  }
+};
+
+const SystemVisual = ({ type, simulating, config }) => {
+  const meta = systemMeta[type] || {
+    badge: "SYSTEM TELEMETRY",
+    source: "NASA ARCHIVES",
+    tag: "REAL-TIME SUBSYSTEM STATUS",
+    status: "OPERATIONAL",
+    telemetry: "STATE: NOMINAL"
+  };
+
+  return (
+    <div className="system-real-visual">
+      <img src={`/img/systems/${type}.jpg`} alt={config.title} className="system-visual-img" />
+      <div className="system-visual-hud-top">
+        <span className="system-hud-badge">{meta.badge}</span>
+        <span className="system-hud-source">{meta.source}</span>
+      </div>
+      <div className="system-visual-hud-center">
+        <div className="system-hud-crosshair" />
+        <span className="system-hud-tag">{meta.tag}</span>
+      </div>
+      <div className="system-visual-hud-bottom">
+        <span className="system-hud-status">
+          <span className="live-dot" /> {meta.telemetry}
+        </span>
+        <span className="system-hud-sim">
+          {simulating ? "● REAL-TIME SIMULATION ACTIVE" : `STATUS: ${meta.status}`}
+        </span>
+      </div>
+    </div>
+  );
 };
 
 const Systems = ({ entered, type }) => {
@@ -33,7 +117,16 @@ const Systems = ({ entered, type }) => {
       <div className="system-tabs">{Object.entries(configs).map(([key, value]) => <a className={key === type ? "active" : ""} href={`/${key}`} key={key}>{value.code}</a>)}<a href="/tracking">TRACK</a><a href="/satellite">ORBIT</a></div>
       <div className="system-cards">{config.cards.map(([label, value, note]) => <div className="system-card" key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
       <div className="systems-content-grid">
-        <section className="systems-panel visual-panel"><div className="systems-heading"><span>LIVE SYSTEM VIEW</span><b>{simulating ? "SIMULATION RUNNING" : "SIMULATION READY"}</b></div>{type === "rover" ? <MissionFeed current={current} /> : <div className={`systems-visual visual-${type}`}><div className="visual-grid" />{type === "cubesat" ? <div className={simulating ? "mini-cubesat satellite-moving" : "mini-cubesat"}><span /><b /><b /></div> : <><div className="visual-orbit orbit-one" /><div className="visual-orbit orbit-two" /><div className="visual-core">{config.code}</div></>}<div className="visual-readout">{type === "fdir" ? "ABNORMAL → ISOLATED → RECOVERING" : type === "ai" ? "UTILITY SCORE / LIVE" : type === "energy" ? "POLICY / EXPLORE BROADLY" : simulating ? "MOTION SIMULATION / ACTIVE" : "PLATFORM VISUAL / READY"}</div></div>}<button className="simulate-button" onClick={() => setSimulating(value => !value)}>{simulating ? "STOP SIMULATION" : "RUN LIVE SIMULATION"}</button>{config.modelUrl && <a className="simulate-button model-link" href={config.modelUrl} target="_blank" rel="noreferrer">{config.modelLabel}</a>}</section>
+        <section className="systems-panel visual-panel">
+          <div className="systems-heading">
+            <span>LIVE SYSTEM VIEW</span>
+            <b>{simulating ? "SIMULATION RUNNING" : "SIMULATION READY"}</b>
+          </div>
+          {type === "rover" ? <MissionFeed current={current} /> : <SystemVisual type={type} simulating={simulating} config={config} />}
+          <button className="simulate-button" onClick={() => setSimulating(value => !value)}>
+            {simulating ? "STOP SIMULATION" : "RUN LIVE SIMULATION"}
+          </button>
+        </section>
         <section className="systems-panel detail-panel"><div className="systems-heading"><span>MISSION LOGIC</span><b>INTERACTIVE</b></div><div className="detail-list">{rows.map(({ row, index }) => <button className={selected === index ? "detail-row selected" : "detail-row"} onClick={() => setSelected(index)} key={`${row[0]}-${index}`}><span className="detail-index">0{index + 1}</span><span><strong>{row[0]}</strong><small>{row[1]}</small></span><b>{row[2]}</b></button>)}</div><div className="detail-explanation"><span>ACTIVE INTERPRETATION</span><b>{config.sections[selected][0]}</b><p>{config.sections[selected][1]}. AMINA uses this state as an input to the next mission decision.</p></div></section>
       </div>
     </div>
