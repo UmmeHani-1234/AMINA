@@ -48,7 +48,7 @@
 /* ── LIVE VIDEO FEEDS ── */
 .video-feeds-section { margin: 16px 0; border: 1px solid rgba(161,236,251,.28); background: linear-gradient(135deg, rgba(5,26,34,.86), rgba(3,15,21,.7)); }
 .video-feeds-heading { border-bottom: 1px solid rgba(161,236,251,.18); }
-.video-feeds-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.video-feeds-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
 .video-feed-card { position: relative; display: flex; flex-direction: column; border-right: 1px solid rgba(161,236,251,.16); overflow: hidden; }
 .video-feed-card:last-child { border-right: 0; }
 .video-feed-label { display: flex; align-items: center; padding: 8px 12px; background: rgba(3,18,25,.85); color: rgba(95,240,255,.9); font-size: 9px; letter-spacing: 1.5px; border-bottom: 1px solid rgba(161,236,251,.15); text-shadow: 0 0 8px rgba(95,240,255,.5); }

@@ -83,7 +83,7 @@ const Dashboard = ({ entered }) => {
       <section className="video-feeds-section">
         <div className="panel-heading video-feeds-heading">
           <div><span className="section-index">00</span><h2>LIVE VIDEO FEEDS</h2></div>
-          <span className="status-chip"><span className="live-dot" style={{ width: 5, height: 5 }} /> 3 ACTIVE FEEDS</span>
+          <span className="status-chip"><span className="live-dot" style={{ width: 5, height: 5 }} /> 2 ACTIVE FEEDS</span>
         </div>
         <div className="video-feeds-grid">
           <div className="video-feed-card">
@@ -92,13 +92,6 @@ const Dashboard = ({ entered }) => {
               <source src="/img/iss-timelapse.mp4" type="video/mp4" />
             </video>
             <div className="video-feed-footer">FULL MOON PASS &middot; EUROPE / MIDDLE EAST &middot; JAN 2025</div>
-          </div>
-          <div className="video-feed-card">
-            <div className="video-feed-label"><span className="live-dot" style={{ width: 5, height: 5, marginRight: 5 }} />ROVER &middot; SESSION 1</div>
-            <video autoPlay muted loop playsInline className="video-feed-player">
-              <source src="/img/recording-1.mp4" type="video/mp4" />
-            </video>
-            <div className="video-feed-footer">MOBILITY TELEMETRY &middot; SOL 042 &middot; 18:17 UTC</div>
           </div>
           <div className="video-feed-card">
             <div className="video-feed-label"><span className="live-dot" style={{ width: 5, height: 5, marginRight: 5 }} />ROVER &middot; SESSION 3</div>
