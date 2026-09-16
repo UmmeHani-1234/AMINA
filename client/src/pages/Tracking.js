@@ -22,7 +22,6 @@ const scienceFrames = [
   ["/img/images%20(3).jpg", "IMG_004.jpg", "Stratification"], ["/img/images%20(4).jpg", "IMG_005.jpg", "Horizon View"], ["/img/images%20(5).jpg", "IMG_006.jpg", "Target Context"],
 ];
 
-const RoverMarker = ({ x, y }) => <g transform={`translate(${x} ${y}) rotate(-13)`} className="rover-marker"><ellipse className="tracker-rover-shadow" cx="0" cy="15" rx="31" ry="7" /><path className="tracker-suspension" d="M-28 7H28 M-22 7L-18 15 M-8 7L-5 15 M7 7L10 15 M21 7L24 15" /><path className="tracker-chassis" d="M-29-7L-19-16H19L29-7V7H-29Z" /><path className="tracker-deck" d="M-18-16H18L22-7H-22Z" /><rect className="tracker-mast" x="-3" y="-31" width="6" height="15" rx="1" /><rect className="tracker-camera" x="-8" y="-36" width="16" height="8" rx="2" /><circle className="tracker-lens" cx="4" cy="-32" r="2" /><rect className="tracker-panel" x="-14" y="-13" width="16" height="6" rx="1" /><path className="tracker-antenna" d="M13-16L18-30" /><circle className="tracker-lens" cx="18" cy="-31" r="2" /><circle className="tracker-wheel" cx="-21" cy="15" r="7" /><circle className="tracker-wheel" cx="0" cy="15" r="7" /><circle className="tracker-wheel" cx="21" cy="15" r="7" /><path className="tracker-hub" d="M-24 15H-18 M-3 15H3 M18 15H24" /></g>;
 
 const RoverVisual = () => {
   return <div style={{ position: "relative", width: "100%", minHeight: "195px", background: "#000" }}>
@@ -48,7 +47,6 @@ const RoverVisual = () => {
   </div>;
 };
 
-const CubeSatMarker = ({ x, y, fault }) => <g transform={`translate(${x} ${y}) rotate(-18)`} className={fault ? "sat-marker fault" : "sat-marker"}><path className="sat-comms-beam" d="M0 13L-64 77" /><rect className="sat-array" x="-55" y="-12" width="28" height="24" rx="1" /><rect className="sat-array" x="27" y="-12" width="28" height="24" rx="1" /><path className="sat-cell-lines" d="M-48-12V12M-41-12V12M-34-12V12M-55 0H-27M34-12V12M41-12V12M48-12V12M27 0H55" /><rect className="sat-bus" x="-27" y="-19" width="54" height="38" rx="3" /><rect className="sat-forward-panel" x="-20" y="-12" width="40" height="19" rx="1" /><circle className="sat-optics" cx="12" cy="-3" r="5" /><path className="sat-antenna" d="M-12-19L-18-34 M-18-34L-23-37 M-18-34L-13-38 M0 19L0 31" /><circle className="sat-status-light" cx="-11" cy="12" r="2" /></g>;
 
 const SatelliteVisual = () => {
   return <div style={{ position: "relative", width: "100%", height: "100%", minHeight: "390px", background: "#000" }}>
