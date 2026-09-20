@@ -1,0 +1,42 @@
+[
+  {
+    "kepler_name": "Kepler-1652 b",
+    "koi_insol": "0.81",
+    "koi_prad": "1.58"
+  },
+  {
+    "kepler_name": "Kepler-1410 b",
+    "koi_insol": "0.84",
+    "koi_prad": "1.39"
+  },
+  {
+    "kepler_name": "Kepler-296 f",
+    "koi_insol": "0.39",
+    "koi_prad": "1.18"
+  },
+  {
+    "kepler_name": "Kepler-442 b",
+    "koi_insol": "0.79",
+    "koi_prad": "1.30"
+  },
+  {
+    "kepler_name": "Kepler-296 e",
+    "koi_insol": "0.89",
+    "koi_prad": "1.06"
+  },
+  {
+    "kepler_name": "Kepler-1649 b",
+    "koi_insol": "0.47",
+    "koi_prad": "0.49"
+  },
+  {
+    "kepler_name": "Kepler-62 f",
+    "koi_insol": "0.44",
+    "koi_prad": "1.43"
+  },
+  {
+    "kepler_name": "Kepler-452 b",
+    "koi_insol": "0.56",
+    "koi_prad": "1.09"
+  }
+]
