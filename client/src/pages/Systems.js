@@ -72,18 +72,74 @@ const systemMeta = {
   }
 };
 
-const SystemVisual = ({ type, simulating, config }) => {
-  const meta = systemMeta[type] || {
+const energyTaskMeta = [
+  {
+    title: "BROAD EXPLORATION & PEAK POWER",
+    task: "Planetary Traverse & Active Autonomy",
+    mode: "HIGH · 75–100%",
+    image: "/img/systems/energy-high.jpg",
+    badge: "MMRTG / PEAK POWER INFLUX",
+    source: "NASA CURIOSITY · NAUKLUFT TRAVERSE",
+    tag: "POWER DRAW: 1.8A · BUS 12.4V · BROAD EXPLORATION",
+    status: "ENERGY RESERVE: 78% (NOMINAL)",
+    telemetry: "MMRTG OUTPUT: 110W · MARGIN: +24%",
+    taskSummary: "Full power reserve enables maximum crawl speed, stereo Navcam terrain scanning, and edge AI obstacle evaluation across open Jezero plains."
+  },
+  {
+    title: "SCIENCE CORING & ACTUATOR DRAW",
+    task: "Robotic Arm Rock Sampling & Cache Operations",
+    mode: "MEDIUM · 35–74%",
+    image: "/img/systems/energy-medium.jpg",
+    badge: "ROBOTIC ARM POWER BUDGETING",
+    source: "NASA PERSEVERANCE · ROCK CORE EXTRACTION",
+    tag: "ACTUATOR CURRENT: 2.9A · SAMPLE CORING ACTIVE",
+    status: "ENERGY RESERVE: 54% (BALANCED)",
+    telemetry: "DRILL MOTOR DRAW: 48W · THERMAL: 21°C",
+    taskSummary: "Robotic arm coring drill and carousel mechanisms draw peak actuator current; non-critical mobility is paused to preserve cell margin while caching samples."
+  },
+  {
+    title: "POWER CONSERVATION RETURN DRIVE",
+    task: "Low-Drag Path Retracement & Power Saving",
+    mode: "LOW · 15–34%",
+    image: "/img/systems/energy-low.jpg",
+    badge: "LOW-POWER CRAWL CORRIDOR",
+    source: "NASA CURIOSITY · DUNE TRAVERSE TRACKS",
+    tag: "MOTOR CURRENT: 1.1A · REVERSING PATH",
+    status: "ENERGY RESERVE: 27% (CONSERVATION)",
+    telemetry: "MOBILITY DRAW: 22W · SCIENCE: STANDBY",
+    taskSummary: "Optional science investigations suspended. AMINA prioritises low-drag crawl along proven wheel tracks to return to safe haven and optimize recharge angles."
+  },
+  {
+    title: "EMERGENCY SAFE-MODE & HIBERNATION",
+    task: "Survival Thermal Preservation & Solar Standby",
+    mode: "CRITICAL · <15%",
+    image: "/img/systems/energy-critical.jpg",
+    badge: "THERMAL PRESERVATION STANDBY",
+    source: "NASA OPPORTUNITY · SOLAR ARRAY PRESERVATION",
+    tag: "STANDBY DRAW: 0.3A · SURVIVAL HEATERS ONLY",
+    status: "ENERGY RESERVE: 12% (SAFE MODE)",
+    telemetry: "SURVIVAL HEATER: ACTIVE · CPU: LOW CLOCK",
+    taskSummary: "All mobility, science cameras, and AI coprocessors are powered down. Rover enters survival hibernation, orienting solar arrays toward sunlight vectors and prioritizing vital battery thermal blankets."
+  }
+];
+
+const SystemVisual = ({ type, simulating, config, selectedIndex = 0 }) => {
+  const isEnergy = type === "energy";
+  const energyMeta = isEnergy ? energyTaskMeta[selectedIndex] || energyTaskMeta[0] : null;
+
+  const meta = isEnergy ? energyMeta : (systemMeta[type] || {
     badge: "SYSTEM TELEMETRY",
     source: "NASA ARCHIVES",
     tag: "REAL-TIME SUBSYSTEM STATUS",
     status: "OPERATIONAL",
     telemetry: "STATE: NOMINAL"
-  };
+  });
+
+  const imgSrc = isEnergy ? energyMeta.image : `/img/systems/${type}.jpg`;
 
   return (
     <div className="system-real-visual">
-      <img src={`/img/systems/${type}.jpg`} alt={config.title} className="system-visual-img" />
+      <img src={imgSrc} alt={isEnergy ? energyMeta.title : config.title} className="system-visual-img" />
       <div className="system-visual-hud-top">
         <span className="system-hud-badge">{meta.badge}</span>
         <span className="system-hud-source">{meta.source}</span>
@@ -109,6 +165,7 @@ const Systems = ({ entered, type }) => {
   const { current } = useMission();
   const [selected, setSelected] = useState(0);
   const [simulating, setSimulating] = useState(false);
+  const isEnergy = type === "energy";
   const rows = useMemo(() => config.sections.map((row, index) => ({ row, index })), [config]);
 
   return <Appear animate show={entered}>
@@ -119,16 +176,85 @@ const Systems = ({ entered, type }) => {
       <div className="systems-content-grid">
         <section className="systems-panel visual-panel">
           <div className="systems-heading">
-            <span>LIVE SYSTEM VIEW</span>
+            <span>{isEnergy ? `TASK VIEW: ${energyTaskMeta[selected].title}` : "LIVE SYSTEM VIEW"}</span>
             <b>{simulating ? "SIMULATION RUNNING" : "SIMULATION READY"}</b>
           </div>
-          {type === "rover" ? <MissionFeed current={current} /> : <SystemVisual type={type} simulating={simulating} config={config} />}
+          {type === "rover" ? <MissionFeed current={current} /> : <SystemVisual type={type} simulating={simulating} config={config} selectedIndex={selected} />}
           <button className="simulate-button" onClick={() => setSimulating(value => !value)}>
             {simulating ? "STOP SIMULATION" : "RUN LIVE SIMULATION"}
           </button>
         </section>
-        <section className="systems-panel detail-panel"><div className="systems-heading"><span>MISSION LOGIC</span><b>INTERACTIVE</b></div><div className="detail-list">{rows.map(({ row, index }) => <button className={selected === index ? "detail-row selected" : "detail-row"} onClick={() => setSelected(index)} key={`${row[0]}-${index}`}><span className="detail-index">0{index + 1}</span><span><strong>{row[0]}</strong><small>{row[1]}</small></span><b>{row[2]}</b></button>)}</div><div className="detail-explanation"><span>ACTIVE INTERPRETATION</span><b>{config.sections[selected][0]}</b><p>{config.sections[selected][1]}. AMINA uses this state as an input to the next mission decision.</p></div></section>
+        <section className="systems-panel detail-panel">
+          <div className="systems-heading">
+            <span>{isEnergy ? "ENERGY TASK POLICIES" : "MISSION LOGIC"}</span>
+            <b>INTERACTIVE (SELECT TASK)</b>
+          </div>
+          <div className="detail-list">
+            {rows.map(({ row, index }) => (
+              <button
+                className={selected === index ? "detail-row selected" : "detail-row"}
+                onClick={() => setSelected(index)}
+                key={`${row[0]}-${index}`}
+              >
+                <span className="detail-index">0{index + 1}</span>
+                {isEnergy && (
+                  <img
+                    src={energyTaskMeta[index].image}
+                    alt={energyTaskMeta[index].title}
+                    className="detail-thumb"
+                  />
+                )}
+                <span>
+                  <strong>{row[0]}</strong>
+                  <small>{isEnergy ? energyTaskMeta[index].task : row[1]}</small>
+                </span>
+                <b>{row[2]}</b>
+              </button>
+            ))}
+          </div>
+          <div className="detail-explanation">
+            <span>{isEnergy ? "ACTIVE TASK POLICY & POWER PROFILE" : "ACTIVE INTERPRETATION"}</span>
+            <b>{isEnergy ? energyTaskMeta[selected].title : config.sections[selected][0]}</b>
+            <p>{isEnergy ? energyTaskMeta[selected].taskSummary : `${config.sections[selected][1]}. AMINA uses this state as an input to the next mission decision.`}</p>
+          </div>
+        </section>
       </div>
+
+      {isEnergy && (
+        <section className="energy-tasks-gallery panel" style={{ marginTop: 16 }}>
+          <div className="panel-heading">
+            <div>
+              <span className="section-index">04</span>
+              <h2>POWER & ENERGY TASK PROFILES</h2>
+            </div>
+            <span className="status-chip">4 OPERATIONAL TASK MODES</span>
+          </div>
+          <div className="energy-tasks-grid">
+            {energyTaskMeta.map((task, idx) => (
+              <div
+                key={task.title}
+                className={`energy-task-card ${selected === idx ? "active" : ""}`}
+                onClick={() => setSelected(idx)}
+              >
+                <div className="energy-task-img-wrap">
+                  <img src={task.image} alt={task.title} className="energy-task-card-img" />
+                  <span className="energy-task-badge">{task.mode}</span>
+                </div>
+                <div className="energy-task-body">
+                  <strong>{task.title}</strong>
+                  <small>{task.task}</small>
+                  <div className="energy-task-footer">
+                    <span>{task.source}</span>
+                    <b className={selected === idx ? "task-active-indicator" : ""}>
+                      {selected === idx ? "SELECTED" : "CLICK TO VIEW"}
+                    </b>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   </Appear>;
 };
